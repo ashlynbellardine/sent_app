@@ -134,6 +134,10 @@ def main():
 
     is_linkedin_user = model.predict(person_df)
 
+    probabilities = model.predict_proba(person_df)
+
+    our_prob = probabilities[0][is_linkedin_user][0]
+
     prediction = (
         "😊 You are a LinkedIn user!"
         if is_linkedin_user == 1
@@ -141,6 +145,8 @@ def main():
     )
 
     st.markdown(f"## {prediction}")
+
+    st.markdown(f"### ({'{:,.2%}'.format(our_prob)} likely)")
 
 
 main()
